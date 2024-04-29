@@ -11,7 +11,7 @@ app.use(cors({
 }))
 app.use(express.json())
 app.use('/auth', adminRouter)
-//app.use(express.static('Public'))
+app.use(express.static('Public'))
 
 app.listen(3000, () => (
     console.log("server is running")

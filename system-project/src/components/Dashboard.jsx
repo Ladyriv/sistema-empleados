@@ -1,10 +1,26 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import axios from 'axios'
 
 
 const Dashboard = () => {
+
+  const navigate = useNavigate()
+  axios.defaults.withCredentials = true
+
+  const handleLogout = () => {
+    axios.get('http//localhost:3000/auth/logout')
+    .then(result => {
+      if(result.data.Status){
+        navigate('/adminLogin')
+      }
+    })
+  }
+
+
+
   return (
     <div className='container-fluid'>
       <div className='row flex-nowrap'>
@@ -28,7 +44,7 @@ const Dashboard = () => {
                   <i className='fs-4 bi-people ms-2'></i>
                   <span className='ms-2 d-done d-sm-inline'>Perfil</span> </Link>
               </li>
-              <li className='w-100'>
+              <li className='w-100' onClick={handleLogout}>
                 <Link to='/dashboard'
                       className='nav-link text-white px-0 align-middle'
                 >
